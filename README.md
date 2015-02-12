@@ -1,6 +1,6 @@
 # OpenSML
 
-Smart Message Language Implementation with Node.js
+Smart Message Language (v. 1.0.3 ) Implementation with Node.js
 
 !!! 
  This is a very unstable and not complete tested version. 
