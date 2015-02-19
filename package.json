@@ -1,6 +1,6 @@
 {
   "name": "open-sml",
-  "version": "0.0.1",
+  "version": "0.1",
   "description": "Smart Message Language Implementation",
   "main": "index.js",
   "scripts": {
@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/dspautz/OpenSML",
   "dependencies": {
+  	"validate.js": "~0.4.0"
   },
   "devDependencies": {
     "chai": "^1.10.0",
