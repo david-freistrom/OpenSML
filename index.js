@@ -23,19 +23,53 @@ var SmlSetProcParameterResponse = require('./lib/messages/SmlSetProcParameterRes
 var SmlList = require('./lib/messages/data_structures/SmlList');
 var SmlListEntry = require('./lib/messages/data_structures/SmlListEntry');
 var SmlObjReqList = require('./lib/messages/data_structures/SmlObjReqList');
-var SmlPeriodEntry = require('./lib/messages/data_structures/SmlPeriodListEntry');
-var SmlProfObjHeaderEntry = require('./lib/messages/data_structures/SmlProfObjHeaderListEntry');
+var SmlPeriodList = require('./lib/messages/data_structures/SmlPeriodList');
+var SmlPeriodListEntry = require('./lib/messages/data_structures/SmlPeriodListEntry');
+var SmlProfObjHeaderListEntry = require('./lib/messages/data_structures/SmlProfObjHeaderListEntry');
 var SmlProfObjHeaderList = require('./lib/messages/data_structures/SmlProfObjHeaderList');
 var SmlProfObjPeriodList = require('./lib/messages/data_structures/SmlProfObjPeriodList');
-var SmlProfObjPeriodEntry = require('./lib/messages/data_structures/SmlProfObjPeriodListEntry');
+var SmlProfObjPeriodListEntry = require('./lib/messages/data_structures/SmlProfObjPeriodListEntry');
 var SmlTime = require('./lib/messages/data_structures/SmlTime');
 var SmlTree = require('./lib/messages/data_structures/SmlTree');
 var SmlTreePath = require('./lib/messages/data_structures/SmlTreePath');
 var SmlTupelEntry = require('./lib/messages/data_structures/SmlTupelEntry');
-var SmlValueEntry = require('./lib/messages/data_structures/SmlValueListEntry');
+var SmlValueListEntry = require('./lib/messages/data_structures/SmlValueListEntry');
 var SmlValueList = require('./lib/messages/data_structures/SmlValueList');
  
 module.exports = {
 		SmlFile: SmlFile,
-		Constants: Constants
+		Constants: Constants,
+		SmlBuffer: SmlBuffer,
+		SmlMessage: SmlMessage,
+		SmlMessageBody: SmlMessageBody,
+		SmlAttentionResponse: SmlAttentionResponse,
+		SmlGetListRequest: SmlGetListRequest,
+		SmlGetListResponse: SmlGetListResponse,
+		SmlGetProcParameterRequest: SmlGetProcParameterRequest,
+		SmlGetProcParameterResponse: SmlGetProcParameterResponse,
+		SmlGetProfileListRequest: SmlGetProfileListRequest,
+		SmlGetProfileListResponse: SmlGetProfileListResponse,
+		SmlGetProfilePackRequest: SmlGetProfilePackRequest,
+		SmlGetProfilePackResponse: SmlGetProfilePackResponse,
+		SmlPublicCloseRequest: SmlPublicCloseRequest,
+		SmlPublicCloseResponse: SmlPublicCloseResponse,
+		SmlPublicOpenRequest: SmlPublicOpenRequest,
+		SmlPublicOpenResponse: SmlPublicOpenResponse,
+		SmlSetProcParameterRequest: SmlSetProcParameterRequest,
+		SmlSetProcParameterResponse: SmlSetProcParameterResponse,
+		SmlList: SmlList,
+		SmlListEntry: SmlListEntry,
+		SmlObjReqList: SmlObjReqList,
+		SmlPeriodList: SmlPeriodList,
+		SmlPeriodListEntry: SmlPeriodListEntry,
+		SmlProfObjHeaderEntry: SmlProfObjHeaderListEntry,
+		SmlProfObjHeaderList: SmlProfObjHeaderList,
+		SmlProfObjPeriodList: SmlProfObjPeriodList,
+		SmlProfObjPeriodListEntry: SmlProfObjPeriodListEntry,
+		SmlTime: SmlTime,
+		SmlTree: SmlTree,
+		SmlTreePath: SmlTreePath,
+		SmlTupelEntry: SmlTupelEntry,
+		SmlValueListEntry: SmlValueListEntry,
+		SmlValueList: SmlValueList
 };
