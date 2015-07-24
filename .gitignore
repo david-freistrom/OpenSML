@@ -4,3 +4,4 @@ build
 .project
 .tern-project
 .jshintrc
+test/results.txt
