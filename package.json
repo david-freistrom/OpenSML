@@ -22,8 +22,7 @@
   },
   "homepage": "https://github.com/dspautz/OpenSML",
   "dependencies": {
-    "node-int64": "^0.3.3",
-    "validate.js": "~0.4.0"
+    "node-int64": "^0.3.3"
   },
   "devDependencies": {
     "chai": "^1.10.0",
