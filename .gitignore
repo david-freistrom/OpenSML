@@ -1,4 +1,4 @@
-./.settings
-./node_modules
-./build
+.settings
+node_modules
+build
 .project
