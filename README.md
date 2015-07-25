@@ -3,7 +3,7 @@
 Smart Message Language (v. 1.0.3 ) Implementation with Node.js
 
 !!! 
- This is a very unstable and not complete tested version. 
+ This is not a complete tested version. 
  Wrong inputs could hang-up or damage your system
  Use it by your own risk 
 !!!
@@ -21,15 +21,22 @@ $ npm install open-sml --save
 ## Developing
 
 ```
-OpenIPT$ npm install
-OpenIPT$ grunt build
-OpenIPT$ grunt test
+OpenSML$ npm install
+OpenSML$ grunt build
+OpenSML$ grunt test
 
 ```
 
 ### Tools
 
 ### ToDo's
+
+* Write long OctetStrings (More than one byte TL-Field) 
+* Write more unit tests with Mocha
+* JsDoc
+* Usage examples
+* Integration tests with Mocha
+* Validations
 
 ## License
 
