@@ -6,8 +6,8 @@ var should = require('chai').should;
 
 describe("SmlProfObjHeaderList", function() {
 
-	var SmlProfObjHeaderList = require("../lib/messages/data_structures/SmlProfObjHeaderList");
-	var Constants = require('../lib/Constants');
+	var SmlProfObjHeaderList = require("../../../lib/messages/data_structures/SmlProfObjHeaderList");
+	var Constants = require('../../../lib/Constants');
 		   
 	describe("SmlProfObjHeaderList()", function(){
 	});

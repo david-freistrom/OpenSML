@@ -6,8 +6,8 @@ var should = require('chai').should;
 
 describe("SmlValueList", function() {
 
-	var SmlValueList = require("../lib/messages/data_structures/SmlValueList");
-	var Constants = require('../lib/Constants');
+	var SmlValueList = require("../../../lib/messages/data_structures/SmlValueList");
+	var Constants = require('../../../lib/Constants');
 		   
 	describe("SmlValueList()", function(){
 	});

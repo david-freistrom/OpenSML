@@ -6,8 +6,8 @@ var should = require('chai').should;
 
 describe("SmlTupelEntry", function() {
 
-	var SmlTupelEntry = require("../lib/messages/data_structures/SmlTupelEntry");
-	var Constants = require('../lib/Constants');
+	var SmlTupelEntry = require("../../../lib/messages/data_structures/SmlTupelEntry");
+	var Constants = require('../../../lib/Constants');
 		   
 	describe("SmlTupelEntry()", function(){
 	});

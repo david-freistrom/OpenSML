@@ -6,8 +6,8 @@ var should = require('chai').should;
 
 describe("SmlTreePath", function() {
 
-	var SmlTreePath = require("../lib/messages/data_structures/SmlTreePath");
-	var Constants = require('../lib/Constants');
+	var SmlTreePath = require("../../../lib/messages/data_structures/SmlTreePath");
+	var Constants = require('../../../lib/Constants');
 		   
 	describe("SmlTreePath()", function(){
 	});

@@ -6,8 +6,8 @@ var should = require('chai').should;
 
 describe("SmlGetProcParameterRequest", function() {
 
-	var SmlGetProcParameterRequest = require("../lib/messages/SmlGetProcParameterRequest");
-	var Constants = require('../lib/Constants');
+	var SmlGetProcParameterRequest = require("../../lib/messages/SmlGetProcParameterRequest");
+	var Constants = require('../../lib/Constants');
 		   
 	describe("SmlGetProcParameterRequest()", function(){
 	});

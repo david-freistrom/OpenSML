@@ -6,8 +6,8 @@ var should = require('chai').should;
 
 describe("SmlGetProfileListResponse", function() {
 
-	var SmlGetProfileListResponse = require("../lib/messages/SmlGetProfileListResponse");
-	var Constants = require('../lib/Constants');
+	var SmlGetProfileListResponse = require("../../lib/messages/SmlGetProfileListResponse");
+	var Constants = require('../../lib/Constants');
 		   
 	describe("SmlGetProfileListResponse()", function(){
 	});

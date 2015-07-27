@@ -6,8 +6,8 @@ var should = require('chai').should;
 
 describe("SmlPublicCloseRequest", function() {
 
-	var SmlPublicCloseRequest = require("../lib/messages/SmlPublicCloseRequest");
-	var Constants = require('../lib/Constants');
+	var SmlPublicCloseRequest = require("../../lib/messages/SmlPublicCloseRequest");
+	var Constants = require('../../lib/Constants');
 		   
 	describe("SmlPublicCloseRequest()", function(){
 	});

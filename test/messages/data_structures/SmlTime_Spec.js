@@ -6,8 +6,8 @@ var should = require('chai').should;
 
 describe("SmlTime", function() {
 
-	var SmlTime = require("../lib/messages/data_structures/SmlTime");
-	var Constants = require('../lib/Constants');
+	var SmlTime = require("../../../lib/messages/data_structures/SmlTime");
+	var Constants = require('../../../lib/Constants');
 		   
 	describe("SmlTime()", function(){
 	});

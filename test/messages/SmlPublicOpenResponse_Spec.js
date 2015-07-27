@@ -6,8 +6,8 @@ var should = require('chai').should;
 
 describe("SmlPublicOpenResponse", function() {
 
-	var SmlPublicOpenResponse = require("../lib/messages/SmlPublicOpenResponse");
-	var Constants = require('../lib/Constants');
+	var SmlPublicOpenResponse = require("../../lib/messages/SmlPublicOpenResponse");
+	var Constants = require('../../lib/Constants');
 		   
 	describe("SmlPublicOpenResponse()", function(){
 	});

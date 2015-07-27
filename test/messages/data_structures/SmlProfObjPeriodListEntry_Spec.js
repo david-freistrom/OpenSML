@@ -6,8 +6,8 @@ var should = require('chai').should;
 
 describe("SmlProfObjPeriodListEntry", function() {
 
-	var SmlProfObjPeriodListEntry = require("../lib/messages/data_structures/SmlProfObjPeriodListEntry");
-	var Constants = require('../lib/Constants');
+	var SmlProfObjPeriodListEntry = require("../../../lib/messages/data_structures/SmlProfObjPeriodListEntry");
+	var Constants = require('../../../lib/Constants');
 		   
 	describe("SmlProfObjPeriodListEntry()", function(){
 	});

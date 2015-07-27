@@ -6,8 +6,8 @@ var should = require('chai').should;
 
 describe("SmlAttentionResponse", function() {
 
-	var SmlAttentionResponse = require("../lib/messages/SmlAttentionResponse");
-	var Constants = require('../lib/Constants');
+	var SmlAttentionResponse = require("../../lib/messages/SmlAttentionResponse");
+	var Constants = require('../../lib/Constants');
 		   
 	describe("SmlAttentionResponse()", function(){
 	});
