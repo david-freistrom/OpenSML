@@ -629,67 +629,177 @@ describe("SmlBuffer", function() {
 	describe("readInteger()", function(){
 		it("should call readTLField()", function(){	    	   
 			smlBuffer = new SmlBuffer();
-			var spy = sinon.spy(smlBuffer, "readTLField");
-	        smlBuffer.readUnsigned();
-	        expect(spy).to.have.been.called;
+			var stub = sinon.stub(smlBuffer, "readTLField");
+			stub.returns({type: Constants.INTEGER, length: 0x02});
+	        smlBuffer.readInteger();
+	        expect(stub).to.have.been.called;
 		});
 		
 		it("should call readInt8 for tlField 0x52", function(){	    	   
 			smlBuffer = new SmlBuffer();
-			var stub = sinon.stub(smlBuffer, "readTLField");
-			stub.returns({type: Constants.INTEGER, length: 0x02});
-			var spy = sinon.spy(smlBuffer, "readInt8");
+			var readTlField = sinon.stub(smlBuffer, "readTLField");
+			readTlField.returns({type: Constants.INTEGER, length: 0x02});
+			var stub = sinon.stub(smlBuffer, "readInt8");
 			smlBuffer.readInteger();
-	        expect(spy).to.have.been.called;
+	        expect(stub).to.have.been.called;
 		});
 		
 		it("should call readInt16 for tlField 0x53", function(){	    	   
 			smlBuffer = new SmlBuffer();
-			var stub = sinon.stub(smlBuffer, "readTLField");
-			stub.returns({type: Constants.INTEGER, length: 0x03});
-			var spy = sinon.spy(smlBuffer, "readInt16");
+			var readTlField = sinon.stub(smlBuffer, "readTLField");
+			readTlField.returns({type: Constants.INTEGER, length: 0x03});
+			var stub = sinon.stub(smlBuffer, "readInt16");
 			smlBuffer.readInteger();
-	        expect(spy).to.have.been.called;
+	        expect(stub).to.have.been.called;
 		});
 		
 		it("should call readInt32 for tlField 0x55", function(){	    	   
 			smlBuffer = new SmlBuffer();
-			var stub = sinon.stub(smlBuffer, "readTLField");
-			stub.returns({type: Constants.INTEGER, length: 0x05});
-			var spy = sinon.spy(smlBuffer, "readInt32");
+			var readTlField = sinon.stub(smlBuffer, "readTLField");
+			readTlField.returns({type: Constants.INTEGER, length: 0x05});
+			var stub = sinon.stub(smlBuffer, "readInt32");
 			smlBuffer.readInteger();
-	        expect(spy).to.have.been.called;
+	        expect(stub).to.have.been.called;
 		});
 		
 		it("should call readInt64 for tlField 0x59", function(){	    	   
 			smlBuffer = new SmlBuffer();
-			var stub = sinon.stub(smlBuffer, "readTLField");
-			stub.returns({type: Constants.INTEGER, length: 0x09});
-			var spy = sinon.spy(smlBuffer, "readInt64");
+			var readTlField = sinon.stub(smlBuffer, "readTLField");
+			readTlField.returns({type: Constants.INTEGER, length: 0x09});
+			var stub = sinon.stub(smlBuffer, "readInt64");
 			smlBuffer.readInteger();
-	        expect(spy).to.have.been.called;
+	        expect(stub).to.have.been.called;
 		});
 		
 		it("should throw Error('Wrong TL-Field for Integer!')", function(){
 			smlBuffer = new SmlBuffer();
-			var stub = sinon.stub(smlBuffer, "readTLField");
-			stub.returns({type: Constants.UNSIGNED, length: 0x09});
+			var readTlField = sinon.stub(smlBuffer, "readTLField");
+			readTlField.returns({type: Constants.UNSIGNED, length: 0x09});
 			var fn = function() {smlBuffer.readInteger()};
 	        expect(fn).to.throw("Wrong TL-Field for Integer!");
 		});
 		
 		it("should return empty string for tlField 0x00", function(){
 			smlBuffer = new SmlBuffer();
-			var stub = sinon.stub(smlBuffer, "readTLField");
-			stub.returns({type: 0x00, length: 0x00});
+			var readTlField = sinon.stub(smlBuffer, "readTLField");
+			readTlField.returns({type: 0x00, length: 0x00});
 	        expect(smlBuffer.readUnsigned()).to.be.empty;
 		});
 	});
 	
 	describe("readSmlValue()", function(){
+		it("should call readOctetString() for tlField 0x00", function(){
+			smlBuffer = new SmlBuffer(new Buffer("00", "hex"));
+			var stub = sinon.stub(smlBuffer, "readOctetString");
+			smlBuffer.readSmlValue();
+			expect(stub).to.have.been.called;
+		});
+		
+		it("should call readOctetString() for tlField 0x80", function(){
+			smlBuffer = new SmlBuffer(new Buffer("80", "hex"));
+			var stub = sinon.stub(smlBuffer, "readOctetString");
+			smlBuffer.readSmlValue();
+			expect(stub).to.have.been.called;
+		});
+		
+		it("should call readSmlBoolean() for tlField 0x40", function(){
+			smlBuffer = new SmlBuffer(new Buffer("40", "hex"));
+			var stub = sinon.stub(smlBuffer, "readSmlBoolean");
+			smlBuffer.readSmlValue();
+			expect(stub).to.have.been.called;
+		});
+		
+		it("should call readInteger() for tlField 0x50", function(){
+			smlBuffer = new SmlBuffer(new Buffer("50", "hex"));
+			var stub = sinon.stub(smlBuffer, "readInteger");
+			smlBuffer.readSmlValue();
+			expect(stub).to.have.been.called;
+		});
+		
+		it("should call readUnsigned() for tlField 0x60", function(){
+			smlBuffer = new SmlBuffer(new Buffer("60", "hex"));
+			var stub = sinon.stub(smlBuffer, "readUnsigned");
+			smlBuffer.readSmlValue();
+			expect(stub).to.have.been.called;
+		});
+		
+		it("should throw Error('Wrong TL-Field 0x11 for SmlValue!')", function(){
+			smlBuffer = new SmlBuffer(new Buffer("11", "hex"));
+			var fn = function() {smlBuffer.readSmlValue()};
+	        expect(fn).to.throw("Wrong TL-Field 0x11 for SmlValue!");
+		});
 	});
 	
 	describe("writeSmlValue()", function(){
+		it("should call writeSmlBoolean() for Constants.BOOLEAN true", function(){
+			smlBuffer = new SmlBuffer();
+			var stub = sinon.stub(smlBuffer, "writeSmlBoolean");
+			smlBuffer.writeSmlValue(true, Constants.BOOLEAN);
+			expect(stub).to.have.been.calledWith(true);
+		});
+		
+		it("should call writeOctetString() for Constants.OCTET_STRING 'hello world'", function(){
+			smlBuffer = new SmlBuffer();
+			var stub = sinon.stub(smlBuffer, "writeOctetString");
+			smlBuffer.writeSmlValue("hello world", Constants.OCTET_STRING);
+			expect(stub).to.have.been.calledWith("hello world");
+		});
+		
+		it("should call writeUnsigned() for Constants.UINT8 1", function(){
+			smlBuffer = new SmlBuffer();
+			var stub = sinon.stub(smlBuffer, "writeUnsigned");
+			smlBuffer.writeSmlValue(1, Constants.UINT8);
+			expect(stub).to.have.been.calledWith(1);
+		});
+		
+		it("should call writeUnsigned() for Constants.UINT16 2", function(){
+			smlBuffer = new SmlBuffer();
+			var stub = sinon.stub(smlBuffer, "writeUnsigned");
+			smlBuffer.writeSmlValue(2, Constants.UINT16);
+			expect(stub).to.have.been.calledWith(2);
+		});
+		
+		it("should call writeUnsigned() for Constants.UINT32 3", function(){
+			smlBuffer = new SmlBuffer();
+			var stub = sinon.stub(smlBuffer, "writeUnsigned");
+			smlBuffer.writeSmlValue(3, Constants.UINT32);
+			expect(stub).to.have.been.calledWith(3);
+		});
+		
+		it("should call writeUnsigned() for Constants.UINT64 4", function(){
+			smlBuffer = new SmlBuffer();
+			var stub = sinon.stub(smlBuffer, "writeUnsigned");
+			smlBuffer.writeSmlValue(4, Constants.UINT64);
+			expect(stub).to.have.been.calledWith(4);
+		});
+		
+		it("should call writeInteger() for Constants.INT8 1", function(){
+			smlBuffer = new SmlBuffer();
+			var stub = sinon.stub(smlBuffer, "writeInteger");
+			smlBuffer.writeSmlValue(1, Constants.INT8);
+			expect(stub).to.have.been.calledWith(1);
+		});
+		
+		it("should call writeInteger() for Constants.INT16 2", function(){
+			smlBuffer = new SmlBuffer();
+			var stub = sinon.stub(smlBuffer, "writeInteger");
+			smlBuffer.writeSmlValue(2, Constants.INT16);
+			expect(stub).to.have.been.calledWith(2);
+		});
+		
+		it("should call writeInteger() for Constants.INT32 3", function(){
+			smlBuffer = new SmlBuffer();
+			var stub = sinon.stub(smlBuffer, "writeInteger");
+			smlBuffer.writeSmlValue(3, Constants.INT32);
+			expect(stub).to.have.been.calledWith(3);
+		});
+		
+		it("should call writeInteger() for Constants.INT64 1", function(){
+			smlBuffer = new SmlBuffer();
+			var stub = sinon.stub(smlBuffer, "writeInteger");
+			smlBuffer.writeSmlValue(4, Constants.INT64);
+			expect(stub).to.have.been.calledWith(4);
+		});
 	});
 	
 	describe("readSmlBoolean()", function(){
