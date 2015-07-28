@@ -69,7 +69,7 @@ describe("SmlBuffer", function() {
 			  
 		it("should write TL-Field 0x0F (0000 1111)", function(){	    	   
 			smlBuffer.writeOctetString("0123456789abcd");
-			expect(smlBuffer.getBuffer().readUInt8().toString(16)).to.be.equal("f");
+			expect(smlBuffer.getBuffer().readUInt8(0).toString(16)).to.be.equal("f");
 		});
 		
 		it("should set offset to 15", function(){	    	   
@@ -79,7 +79,7 @@ describe("SmlBuffer", function() {
 		
 		it("should write TL-Field 0x8103 (1000 0001 0000 0011)", function(){	
 			smlBuffer.writeOctetString("0123456789ABCDEFG");
-			expect(smlBuffer.getBuffer().readUInt16BE().toString(16)).to.be.equal("8103");
+			expect(smlBuffer.getBuffer().readUInt16BE(0).toString(16)).to.be.equal("8103");
 		});
 		
 		it("should set offset to 19", function(){	    	   
@@ -121,13 +121,13 @@ describe("SmlBuffer", function() {
 			  
 		it("should read value 16", function(){	    	   
 			var smlBuffer = new SmlBuffer();
-			smlBuffer.getBuffer().writeUInt8(16);
+			smlBuffer.getBuffer().writeUInt8(16, 0);
 			expect(smlBuffer.readUInt8()).to.be.equal(16);
 		});
 		
 		it("should set offset to value 1", function(){
 			var smlBuffer = new SmlBuffer();
-			smlBuffer.getBuffer().writeUInt8(16);
+			smlBuffer.getBuffer().writeUInt8(16, 0);
 			smlBuffer.readUInt8();
 			expect(smlBuffer.getOffset()).to.be.equal(1);
 		});
@@ -138,13 +138,13 @@ describe("SmlBuffer", function() {
 		  
 		it("should read value 65281", function(){	    	   
 			var smlBuffer = new SmlBuffer();
-			smlBuffer.getBuffer().writeUInt16BE(65281);
+			smlBuffer.getBuffer().writeUInt16BE(65281, 0);
 			expect(smlBuffer.readUInt16()).to.be.equal(65281);
 		});
 		
 		it("should set offset to value 2", function(){
 			var smlBuffer = new SmlBuffer();
-			smlBuffer.getBuffer().writeUInt16BE(65281);
+			smlBuffer.getBuffer().writeUInt16BE(65281, 0);
 			smlBuffer.readUInt16();
 			expect(smlBuffer.getOffset()).to.be.equal(2);
 		});
@@ -155,13 +155,13 @@ describe("SmlBuffer", function() {
 		  
 		it("should read value 4294967041", function(){	    	   
 			smlBuffer = new SmlBuffer();
-			smlBuffer.getBuffer().writeUInt32BE(4294967041);
+			smlBuffer.getBuffer().writeUInt32BE(4294967041, 0);
 			expect(smlBuffer.readUInt32()).to.be.equal(4294967041);
 		});
 		
 		it("should set offset to value 4", function(){
 			smlBuffer = new SmlBuffer();
-			smlBuffer.getBuffer().writeUInt32BE(4294967041);
+			smlBuffer.getBuffer().writeUInt32BE(4294967041, 0);
 			smlBuffer.readUInt32();
 			expect(smlBuffer.getOffset()).to.be.equal(4);
 		});
@@ -172,13 +172,13 @@ describe("SmlBuffer", function() {
 		  
 		it("should read value 18446744073709552000", function(){	    	   
 			smlBuffer = new SmlBuffer();
-			smlBuffer.getBuffer().writeDoubleBE(18446744073709552000);
+			smlBuffer.getBuffer().writeDoubleBE(18446744073709552000, 0);
 			expect(smlBuffer.readUInt64()).to.be.equal(18446744073709552000);
 		});
 		
 		it("should set offset to value 8", function(){
 			smlBuffer = new SmlBuffer();
-			smlBuffer.getBuffer().writeDoubleBE(18446744073709552000);
+			smlBuffer.getBuffer().writeDoubleBE(18446744073709552000, 0);
 			smlBuffer.readUInt64();
 			expect(smlBuffer.getOffset()).to.be.equal(8);
 		});
@@ -189,13 +189,13 @@ describe("SmlBuffer", function() {
 		  
 		it("should read value -16", function(){	    	   
 			smlBuffer = new SmlBuffer();
-			smlBuffer.getBuffer().writeInt8(-16);
+			smlBuffer.getBuffer().writeInt8(-16, 0);
 			expect(smlBuffer.readInt8()).to.be.equal(-16);
 		});
 		
 		it("should set offset to value 1", function(){
 			smlBuffer = new SmlBuffer();
-			smlBuffer.getBuffer().writeInt8(-16);
+			smlBuffer.getBuffer().writeInt8(-16, 0);
 			smlBuffer.readInt8();
 			expect(smlBuffer.getOffset()).to.be.equal(1);
 		});
@@ -206,13 +206,13 @@ describe("SmlBuffer", function() {
 		  
 		it("should read value -3841", function(){	    	   
 			smlBuffer = new SmlBuffer();
-			smlBuffer.getBuffer().writeInt16BE(-3841);
+			smlBuffer.getBuffer().writeInt16BE(-3841, 0);
 			expect(smlBuffer.readInt16()).to.be.equal(-3841);
 		});
 		
 		it("should set offset to value 2", function(){
 			smlBuffer = new SmlBuffer();
-			smlBuffer.getBuffer().writeInt16BE(-3841);
+			smlBuffer.getBuffer().writeInt16BE(-3841, 0);
 			smlBuffer.readInt16();
 			expect(smlBuffer.getOffset()).to.be.equal(2);
 		});
@@ -223,13 +223,13 @@ describe("SmlBuffer", function() {
 		  
 		it("should read value -268435201", function(){	    	   
 			smlBuffer = new SmlBuffer();
-			smlBuffer.getBuffer().writeInt32BE(-268435201);
+			smlBuffer.getBuffer().writeInt32BE(-268435201, 0);
 			expect(smlBuffer.readInt32()).to.be.equal(-268435201);
 		});
 		
 		it("should set offset to value 4", function(){
 			smlBuffer = new SmlBuffer();
-			smlBuffer.getBuffer().writeInt32BE(-268435201);
+			smlBuffer.getBuffer().writeInt32BE(-268435201, 0);
 			smlBuffer.readInt32();
 			expect(smlBuffer.getOffset()).to.be.equal(4);
 		});
@@ -240,13 +240,13 @@ describe("SmlBuffer", function() {
 		  
 		it("should read value -16", function(){	    	   
 			smlBuffer = new SmlBuffer();
-			smlBuffer.getBuffer().writeDoubleBE(-16);
+			smlBuffer.getBuffer().writeDoubleBE(-16, 0);
 			expect(smlBuffer.readInt64()).to.be.equal(-16);
 		});
 		
 		it("should set offset to value 8", function(){
 			smlBuffer = new SmlBuffer();
-			smlBuffer.getBuffer().writeDoubleBE(-16);
+			smlBuffer.getBuffer().writeDoubleBE(-16, 0);
 			smlBuffer.readInt64();
 			expect(smlBuffer.getOffset()).to.be.equal(8);
 		});
@@ -428,7 +428,7 @@ describe("SmlBuffer", function() {
 		it("should write value 0x76", function(){	    	   
 			smlBuffer = new SmlBuffer();
 			smlBuffer.writeTLField(0x76);
-			expect(smlBuffer.getBuffer().readUInt8()).to.be.equal(0x76);			
+			expect(smlBuffer.getBuffer().readUInt8(0)).to.be.equal(0x76);			
 		});
 		
 		it("should set offset to value 1 for 0x76", function(){	    	   
@@ -440,7 +440,7 @@ describe("SmlBuffer", function() {
 		it("should write value 0xF171", function(){	    	   
 			smlBuffer = new SmlBuffer();
 			smlBuffer.writeTLField(0xF171);
-			expect(smlBufer.getBuffer().readUInt16BE()).to.be.equal(0xF171);
+			expect(smlBufer.getBuffer().readUInt16BE(0)).to.be.equal(0xF171);
 		});
 		
 		it("should set offset to value 2 for 0xF171", function(){	    	   
@@ -509,7 +509,63 @@ describe("SmlBuffer", function() {
 	});
 	
 	describe("readUnsigned()", function(){
+		it("should call readTLField()", function(){	    	   
+			smlBuffer = new SmlBuffer();
+			var spy = sinon.spy(smlBuffer, "readTLField");
+	        smlBuffer.readUnsigned();
+	        expect(spy).to.have.been.called;
+		});
 		
+		it("should call readUInt8 for tlField 0x62", function(){	    	   
+			smlBuffer = new SmlBuffer();
+			var stub = sinon.stub(smlBuffer, "readTLField");
+			stub.returns({type: Constants.UNSIGNED, length: 0x02});
+			var spy = sinon.spy(smlBuffer, "readUInt8");
+			smlBuffer.readUnsigned();
+	        expect(spy).to.have.been.called;
+		});
+		
+		it("should call readUInt16 for tlField 0x63", function(){	    	   
+			smlBuffer = new SmlBuffer();
+			var stub = sinon.stub(smlBuffer, "readTLField");
+			stub.returns({type: Constants.UNSIGNED, length: 0x03});
+			var spy = sinon.spy(smlBuffer, "readUInt16");
+			smlBuffer.readUnsigned();
+	        expect(spy).to.have.been.called;
+		});
+		
+		it("should call readUInt32 for tlField 0x65", function(){	    	   
+			smlBuffer = new SmlBuffer();
+			var stub = sinon.stub(smlBuffer, "readTLField");
+			stub.returns({type: Constants.UNSIGNED, length: 0x05});
+			var spy = sinon.spy(smlBuffer, "readUInt32");
+			smlBuffer.readUnsigned();
+	        expect(spy).to.have.been.called;
+		});
+		
+		it("should call readUInt64 for tlField 0x69", function(){	    	   
+			smlBuffer = new SmlBuffer();
+			var stub = sinon.stub(smlBuffer, "readTLField");
+			stub.returns({type: Constants.UNSIGNED, length: 0x09});
+			var spy = sinon.spy(smlBuffer, "readUInt64");
+			smlBuffer.readUnsigned();
+	        expect(spy).to.have.been.called;
+		});
+		
+		it("should throw Error('Wrong TL-Field for Unsigned!')", function(){
+			smlBuffer = new SmlBuffer();
+			var stub = sinon.stub(smlBuffer, "readTLField");
+			stub.returns({type: Constants.INTEGER, length: 0x09});
+			var fn = function() {smlBuffer.readUnsigned()};
+	        expect(fn).to.throw("Wrong TL-Field for Unsigned!");
+		});
+		
+		it("should return empty string for tlField 0x00", function(){
+			smlBuffer = new SmlBuffer();
+			var stub = sinon.stub(smlBuffer, "readTLField");
+			stub.returns({type: 0x00, length: 0x00});
+	        expect(smlBuffer.readUnsigned()).to.be.empty;
+		});
 	});
 	
 	describe("writeInteger()", function(){
@@ -570,7 +626,64 @@ describe("SmlBuffer", function() {
 		});
 	});
 	
-	describe("readIneger()", function(){
+	describe("readInteger()", function(){
+		it("should call readTLField()", function(){	    	   
+			smlBuffer = new SmlBuffer();
+			var spy = sinon.spy(smlBuffer, "readTLField");
+	        smlBuffer.readUnsigned();
+	        expect(spy).to.have.been.called;
+		});
+		
+		it("should call readInt8 for tlField 0x52", function(){	    	   
+			smlBuffer = new SmlBuffer();
+			var stub = sinon.stub(smlBuffer, "readTLField");
+			stub.returns({type: Constants.INTEGER, length: 0x02});
+			var spy = sinon.spy(smlBuffer, "readInt8");
+			smlBuffer.readInteger();
+	        expect(spy).to.have.been.called;
+		});
+		
+		it("should call readInt16 for tlField 0x53", function(){	    	   
+			smlBuffer = new SmlBuffer();
+			var stub = sinon.stub(smlBuffer, "readTLField");
+			stub.returns({type: Constants.INTEGER, length: 0x03});
+			var spy = sinon.spy(smlBuffer, "readInt16");
+			smlBuffer.readInteger();
+	        expect(spy).to.have.been.called;
+		});
+		
+		it("should call readInt32 for tlField 0x55", function(){	    	   
+			smlBuffer = new SmlBuffer();
+			var stub = sinon.stub(smlBuffer, "readTLField");
+			stub.returns({type: Constants.INTEGER, length: 0x05});
+			var spy = sinon.spy(smlBuffer, "readInt32");
+			smlBuffer.readInteger();
+	        expect(spy).to.have.been.called;
+		});
+		
+		it("should call readInt64 for tlField 0x59", function(){	    	   
+			smlBuffer = new SmlBuffer();
+			var stub = sinon.stub(smlBuffer, "readTLField");
+			stub.returns({type: Constants.INTEGER, length: 0x09});
+			var spy = sinon.spy(smlBuffer, "readInt64");
+			smlBuffer.readInteger();
+	        expect(spy).to.have.been.called;
+		});
+		
+		it("should throw Error('Wrong TL-Field for Integer!')", function(){
+			smlBuffer = new SmlBuffer();
+			var stub = sinon.stub(smlBuffer, "readTLField");
+			stub.returns({type: Constants.UNSIGNED, length: 0x09});
+			var fn = function() {smlBuffer.readInteger()};
+	        expect(fn).to.throw("Wrong TL-Field for Integer!");
+		});
+		
+		it("should return empty string for tlField 0x00", function(){
+			smlBuffer = new SmlBuffer();
+			var stub = sinon.stub(smlBuffer, "readTLField");
+			stub.returns({type: 0x00, length: 0x00});
+	        expect(smlBuffer.readUnsigned()).to.be.empty;
+		});
 	});
 	
 	describe("readSmlValue()", function(){

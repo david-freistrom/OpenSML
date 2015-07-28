@@ -21,7 +21,6 @@ $ npm install open-sml --save
 ## Developing
 
 ```
-OpenSML$ npm install
 OpenSML$ grunt build
 OpenSML$ grunt test
 
