@@ -511,9 +511,10 @@ describe("SmlBuffer", function() {
 	describe("readUnsigned()", function(){
 		it("should call readTLField()", function(){	    	   
 			smlBuffer = new SmlBuffer();
-			var spy = sinon.spy(smlBuffer, "readTLField");
-	        smlBuffer.readUnsigned();
-	        expect(spy).to.have.been.called;
+			var stub = sinon.stub(smlBuffer, "readTLField");
+			stub.returns({type: Constants.UNSIGNED, length: 0x02});
+			smlBuffer.readUnsigned();
+	        expect(stub).to.have.been.called;
 		});
 		
 		it("should call readUInt8 for tlField 0x62", function(){	    	   
@@ -803,9 +804,81 @@ describe("SmlBuffer", function() {
 	});
 	
 	describe("readSmlBoolean()", function(){
+		it("should call readTLField()", function(){	    	   
+			smlBuffer = new SmlBuffer();
+			var stub = sinon.stub(smlBuffer, "readTLField");
+			stub.returns({type: Constants.BOOLEAN, length: 0x02});
+	        smlBuffer.readSmlBoolean();
+	        expect(stub).to.have.been.called;
+		});
+		
+		it("should call readUInt8 for tlField 0x42", function(){	    	   
+			smlBuffer = new SmlBuffer();
+			var readTlField = sinon.stub(smlBuffer, "readTLField");
+			readTlField.returns({type: Constants.BOOLEAN, length: 0x02});
+			var stub = sinon.stub(smlBuffer, "readUInt8");
+			smlBuffer.readSmlBoolean();
+	        expect(stub).to.have.been.called;
+		});
+		
+		it("should return true", function(){	    	   
+			smlBuffer = new SmlBuffer(new Buffer("4201", "hex"));
+	        expect(smlBuffer.readSmlBoolean()).to.be.equal(true);
+		});
+		
+		it("should return false", function(){	    	   
+			smlBuffer = new SmlBuffer(new Buffer("4200", "hex"));
+	        expect(smlBuffer.readSmlBoolean()).to.be.equal(false);
+		});
+		
+		it("should return undefined for OPTIONAL", function(){	    	   
+			smlBuffer = new SmlBuffer(new Buffer("01", "hex"));
+	        expect(smlBuffer.readSmlBoolean()).to.be.equal(undefined);
+		});
+		
+		it("should throw Error('Wrong TL-Field for Boolean!')", function(){
+			smlBuffer = new SmlBuffer(new Buffer("4300", "hex"));
+			var fn = function() {smlBuffer.readSmlBoolean()};
+	        expect(fn).to.throw("Wrong TL-Field for Boolean!");
+		});
+		
 	});
 	
 	describe("writeSmlBoolean()", function(){
+		it("should call writeUInt8(0x01)", function(){	    	   
+			smlBuffer = new SmlBuffer();
+			var stub = sinon.stub(smlBuffer, "writeUInt8");
+	        smlBuffer.writeSmlBoolean(undefined);
+	        expect(stub).to.have.been.calledWith(0x01);
+		});
+		
+		it("should call writeTLField(0x42) for value true", function(){	    	   
+			smlBuffer = new SmlBuffer();
+			var stub = sinon.stub(smlBuffer, "writeTLField");
+	        smlBuffer.writeSmlBoolean(true);
+	        expect(stub).to.have.been.calledWith(0x42);
+		});
+		
+		it("should call writeTLField(0x42) for value false", function(){	    	   
+			smlBuffer = new SmlBuffer();
+			var stub = sinon.stub(smlBuffer, "writeTLField");
+	        smlBuffer.writeSmlBoolean(false);
+	        expect(stub).to.have.been.calledWith(0x42);
+		});
+		
+		it("should call writeUInt8(0x01) for value true", function(){	    	   
+			smlBuffer = new SmlBuffer();
+			var stub = sinon.stub(smlBuffer, "writeUInt8");
+	        smlBuffer.writeSmlBoolean(true);
+	        expect(stub).to.have.been.calledWith(0x01);
+		});
+		
+		it("should call writeUInt8(0x00) for value false", function(){	    	   
+			smlBuffer = new SmlBuffer();
+			var stub = sinon.stub(smlBuffer, "writeUInt8");
+	        smlBuffer.writeSmlBoolean(false);
+	        expect(stub).to.have.been.calledWith(0x00);
+		});
 	});
 	
 	describe("readChoice()", function(){
