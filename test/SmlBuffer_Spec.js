@@ -189,6 +189,12 @@ describe("SmlBuffer", function() {
 			expect(smlBuffer.getOffset()).to.be.equal(8);
 		});
 
+        it("should read value 00000000025DAC50=39693392", function(){
+			smlBuffer = new SmlBuffer();
+			smlBuffer.buffer=new Buffer("00000000025DAC50", "hex");
+			expect(smlBuffer.readUInt64()).to.be.equal(39693392);
+		});
+
 	});
 
 	describe("readInt8()", function(){
@@ -327,6 +333,12 @@ describe("SmlBuffer", function() {
 			expect(smlBuffer.getOffset()).to.be.equal(8);
 		});
 
+        it("should write value 39693392=00000000025DAC50", function(){
+			smlBuffer = new SmlBuffer();
+			smlBuffer.writeUInt64(39693392);
+            var destBuffer=new Buffer("00000000025DAC50", "hex");
+			expect(smlBuffer.getBuffer().compare(destBuffer)).to.be.equal(0);
+		});
 	});
 
 	describe("writeInt8()", function(){
