@@ -1,11 +1,11 @@
 # OpenSML
 
-Smart Message Language (v. 1.0.3 ) Implementation with Node.js
+Smart Message Language (v. 1.0.3 ) Implementation with Node.js 4.x+
 
-!!! 
- This is not a complete tested version. 
+!!!
+ This is not a complete tested version.
  Wrong inputs could hang-up or damage your system
- Use it by your own risk 
+ Use it by your own risk
 !!!
 
 ## Install
@@ -31,7 +31,7 @@ OpenSML$ grunt test
 
 ### ToDo's
 
-* Write long OctetStrings (More than one byte TL-Field) 
+* Write long OctetStrings (More than one byte TL-Field)
 * Write more unit tests with Mocha
 * JsDoc
 * Usage examples
