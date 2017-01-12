@@ -58,92 +58,62 @@ function compareMessages(buf1, buf2) {
     var mismatch = false;
     do {
         if (buf1[cnt_buf1]!=buf2[cnt_buf2]) {
-            if (buf1[cnt_buf1]===0x65 && buf2[cnt_buf2]===0x62) {
-                if (buf1[cnt_buf1+1]!==0x00 || buf1[cnt_buf1+2]!==0x00 || buf1[cnt_buf1+3]!==0x00) {
-                    mismatch=true;
-                    break;
+            if ((buf1[cnt_buf1]>0x61 && buf1[cnt_buf1]<=0x69) && (buf2[cnt_buf2]>0x61 && buf2[cnt_buf2]<=0x69)) {
+                var ignore_length=buf1[cnt_buf1]-buf2[cnt_buf2]; // >0 means buf1 more digits then buf2, <0 other way
+                if (ignore_length>0) {
+                    for (var i=1;i<=ignore_length;i++) {
+                        if (buf1[cnt_buf1+i]!==0x00) {
+                            mismatch=true;
+                            break;
+                        }
+                    }
+                    if (!mismatch) {
+                        cnt_buf1+=ignore_length;
+                    }
                 }
                 else {
-                    cnt_buf1+=3;
+                    for (var i=1;i<=(-ignore_length);i++) {
+                        if (buf2[cnt_buf2+i]!==0x00) {
+                            mismatch=true;
+                            break;
+                        }
+                    }
+                    if (!mismatch) {
+                        cnt_buf2+=(-ignore_length);
+                    }
                 }
+                if (mismatch) break;
             }
-            else if (buf1[cnt_buf1]===0x65 && buf2[cnt_buf2]===0x63) {
-                if (buf1[cnt_buf1+1]!==0x00 || buf1[cnt_buf1+2]!==0x00) {
-                    mismatch=true;
-                    break;
+            else if ((buf1[cnt_buf1]>0x51 && buf1[cnt_buf1]<=0x59) && (buf2[cnt_buf2]>0x51 && buf2[cnt_buf2]<=0x59)) {
+                var ignore_length=buf1[cnt_buf1]-buf2[cnt_buf2]; // >0 means buf1 more digits then buf2, <0 other way
+                if (ignore_length>0) {
+                    for (var i=1;i<=ignore_length;i++) {
+                        if (buf1[cnt_buf1+i]!==0x00) {
+                            mismatch=true;
+                            break;
+                        }
+                    }
+                    if (!mismatch) {
+                        cnt_buf1+=ignore_length;
+                    }
                 }
                 else {
-                    cnt_buf1+=2;
+                    for (var i=1;i<=(-ignore_length);i++) {
+                        if (buf2[cnt_buf2+i]!==0x00) {
+                            mismatch=true;
+                            break;
+                        }
+                    }
+                    if (!mismatch) {
+                        cnt_buf2+=(-ignore_length);
+                    }
                 }
+                if (mismatch) break;
             }
-            else if (buf1[cnt_buf1]===0x65 && buf2[cnt_buf2]===0x64) {
-                if (buf1[cnt_buf1+1]!==0x00) {
-                    mismatch=true;
-                    break;
-                }
-                else {
-                    cnt_buf1+=1;
-                }
-            }
-            else if (buf1[cnt_buf1]===0x59 && buf2[cnt_buf2]===0x56) {
-                if (buf1[cnt_buf1+1]!==0x00 || buf1[cnt_buf1+2]!==0x00 || buf1[cnt_buf1+3]!==0x00) {
-                    mismatch=true;
-                    break;
-                }
-                else {
-                    cnt_buf1+=3;
-                }
-            }
-            else if (buf1[cnt_buf1]===0x69 && (buf2[cnt_buf2]>0x61 && buf2[cnt_buf2]<0x69)) {
-                // No compare possible because differntly coded somehow ... overread
-                cnt_buf1+=8;
-                cnt_buf2+=buf2[cnt_buf2]-0x61;
-            }
+
             else if (buf1[cnt_buf1]===0x1b && buf2[cnt_buf2]===0x00) {
                 // ignore different length of filler bytes at the end
                 cnt_buf1-=1;
-            }
-
-            else if (buf2[cnt_buf2]===0x65 && buf1[cnt_buf1]===0x62) {
-                if (buf2[cnt_buf2+1]!==0x00 || buf2[cnt_buf2+2]!==0x00 || buf2[cnt_buf2+3]!==0x00) {
-                    mismatch=true;
-                    break;
-                }
-                else {
-                    cnt_buf2+=3;
-                }
-            }
-            else if (buf2[cnt_buf2]===0x65 && buf1[cnt_buf1]===0x63) {
-                if (buf2[cnt_buf2+1]!==0x00 || buf2[cnt_buf2+2]!==0x00) {
-                    mismatch=true;
-                    break;
-                }
-                else {
-                    cnt_buf2+=2;
-                }
-            }
-            else if (buf2[cnt_buf2]===0x65 && buf1[cnt_buf1]===0x64) {
-                if (buf2[cnt_buf2+1]!==0x00) {
-                    mismatch=true;
-                    break;
-                }
-                else {
-                    cnt_buf2+=1;
-                }
-            }
-            else if (buf2[cnt_buf2]===0x59 && buf1[cnt_buf2]===0x56) {
-                if (buf2[cnt_buf2+1]!==0x00 || buf2[cnt_buf2+2]!==0x00 || buf2[cnt_buf2+3]!==0x00) {
-                    mismatch=true;
-                    break;
-                }
-                else {
-                    cnt_buf2+=3;
-                }
-            }
-            else if (buf2[cnt_buf2]===0x69 && (buf1[cnt_buf1]>0x61 && buf1[cnt_buf1]<0x69)) {
-                // No compare possible because differntly coded somehow ... overread
-                cnt_buf2+=8;
-                cnt_buf1+=buf1[cnt_buf1]-0x61;
             }
             else if (buf2[cnt_buf2]===0x1b && buf1[cnt_buf1]===0x00) {
                 // ignore different length of filler bytes at the end
@@ -173,10 +143,10 @@ function compareMessages(buf1, buf2) {
         console.log("MISMATCH on Pos "+cnt_buf1+" ("+buf1[cnt_buf1].toString(16)+") vs. "+cnt_buf2+" ("+buf2[cnt_buf2].toString(16)+")");
     }
     if (cnt_buf1!=buf1.length-3) {
-        console.log("No MISMATH, Compare Ended Pos. "+cnt_buf1+" from "+buf1.length+" available on buf1, ignoring rest");
+        console.log("No MISMATH, Compare Ended Pos. "+cnt_buf1+" from "+buf1.length+" available on rewritten sml, ignoring rest");
     }
     if (cnt_buf2!=buf2.length-3) {
-        console.log("No MISMATH, Compare Ended Pos. "+cnt_buf2+" from "+buf2.length+" available on buf1, ignoring rest");
+        console.log("No MISMATH, Compare Ended Pos. "+cnt_buf2+" from "+buf2.length+" available on original sml, ignoring rest");
     }
     return !mismatch;
 }
@@ -209,16 +179,11 @@ var stream = [];
 /*24*/stream.push(new Buffer("1B1B1B1B010101017607001000D9ABAA620062007263010176010107001001698E8E0B06454D480104C56BCCB10101632D2E007607001000D9ABAB620062007263070177010B06454D480104C56BCCB10172620165016934877777078181C78203FF0101010104454D480177070100000009FF010101010B06454D480104C56BCCB10177070100010800FF63018201621E52FF560003EE4E600177070100010801FF0101621E52FF560003EE4E600177070100010802FF0101621E52FF56000000000001770701000F0700FF0101621B52FF55000010480177078181C78205FF0101010183026E08F5C99793A18AABADA3FDA2EF8DEB232E44EC73D5E143E6624F8D5C7C6F828E67757E23845E3A0F02D2517FBF18FC010101634148007607001000D9ABAE62006200726302017101634A5A00001B1B1B1B1A017DA3", "hex"));
 /*25*/stream.push(new Buffer("1B1B1B1B010101017607000C03A6B2DC620062007263010176010107000C042690F40B06454D4801001D42A7AC01016389E6007607000C03A6B2DD620062007263070177010B06454D4801001D42A7AC01726201650426D5FB7777078181C78203FF0101010104454D480177070100000009FF010101010B06454D4801001D42A7AC0177070100010800FF63018201621E52FF560002076A1D0177070100010801FF0101621E52FF560002076A1D0177070100010802FF0101621E52FF56000000000001770701000F0700FF0101621B52FF55000010710177078181C78205FF010101018302A6FDBC1960703CE4E4E3CDE6F5AFBE529011898B60CBAED88C98DD5C9419D268DB032DB618DEC7F6A275797B86A7EBDB01010163AA21007607000C03A6B2E06200620072630201710163E8A500001B1B1B1B1A015A8B", "hex"));
 /*26*/stream.push(new Buffer("1B1B1B1B0101010176070083000000EC620062007263010176010107008300A8004F0B06454D4801001D4776AE01016367B60076070083000000ED620062007263070177010B06454D4801001D4776AE017262016500A8260F7B77078181C78203FF0101010104454D480177070100000009FF010101010B06454D4801001D4776AE0177070100010800FF63010001621E52FF56000090C8450177070100020800FF63010001621E52FF56000000007E0177070100010801FF0101621E52FF56000090C8450177070100020801FF0101621E52FF56000000007E0177070100010802FF0101621E52FF56000000000001770701000F0700FF0101621B52FF55000000000177078181C78205FF010101018302B96B647BEEA6EE10453758E3888420655B8540C48BB1C4968F6333DB2B043670BDFFFEF5D4CB35140C579F127D7F22230177070100603202040101010163008D017707010060320206010101010101010163AA120076070083000000EF6200620072630201710163A558000000001B1B1B1B1A03735C", "hex"));
-/*27??*/stream.push(new Buffer("1b1b1b1b01010101760505a73cbd62006200726301017601010501e269930b090149534b0003bf28d1010163a9cc00760505a73cbe620062007263070177010b090149534b0003bf28d1070100620affff7262016502787ca27d77078181c78203ff010101010449534b0177070100000009ff010101010b090149534b0003bf28d10177070100010800ff65000101a201621e52ff59000000000231ddd10177070100010801ff0101621e52ff59000000000231ddd10177070100010802ff0101621e52ff5900000000000000000177070100020800ff65000101a201621e52ff5900000000057d7b6d0177070100020801ff0101621e52ff5900000000057d7b6d0177070100020802ff0101621e52ff5900000000000000000177070100100700ff0101621b520055ffffe6240177070100240700ff0101621b520055fffff7230177070100380700ff0101621b520055fffff77601770701004c0700ff0101621b520055fffff7880177078181c78205ff0101010183027d1a6997e2eb8f3fdf96a33eee907e314d6d27140aaffdeecbee0f14937a7cfd2054fd71e63e4a38ee3d87289a5b17ba0101016355e400760505a73cbc6200620072630201710163d02c001b1b1b1b1a006a2a", "hex"));
-/*28*/stream.push(new Buffer("1b1b1b1b0101010176050471a747620062007263010176010105017b37c10b090149534b0003c2a0a001016339200076050471a748620062007263070177010b090149534b0003c2a0a0070100620affff72620165022b94677a77078181c78203ff010101010449534b0177070100000009ff010101010b090149534b0003c2a0a00177070100010800ff650000018201621e52ff5900000000057aec910177070100010801ff0101621e52ff5900000000057aec910177070100010802ff0101621e52ff5900000000000000000177070100100700ff0101621b520055000000ed0177070100240700ff0101621b5200550000004f0177070100380700ff0101621b5200550000008901770701004c0700ff0101621b520055000000150177078181c78205ff0101010183026340b3539d70e46ac94b3879945918401c8c8bee998cd94c2465c46e12b96e6604842ad3b020820de7d7aa6b973bb9590101016396c90076050471a7496200620072630201710163f841001b1b1b1b1a007116", "hex"));
-/*29*/stream.push(new Buffer("1b1b1b1b01010101760515001cc962006200726301017601010507000997090805353f2d50dffb0101631fa500760515001cca62006200726307017701090805353f2d50dffb070100620affff72620165081f73967a77078181c78203ff010101010449534b0177070100000009ff01010101090805353f2d50dffb0177070100020800ff650001000001621e52ff59000000000a2e65710177070100020801ff0101621e52ff59000000000a2e65710177070100020802ff0101621e52ff5900000000000000000177070100100700ff0101621b520055000000000177070100240700ff0101621b520055000000000177070100380700ff0101621b5200550000000001770701004c0700ff0101621b520055000000000177078181c78205ff010101018302009be62e9f9a76ee597e7d3c1dc7ebc9cc73c852702d52ff4dc8c86eff6d61489289b73d55739eb3815ad0d1fc013c0f01010163e33700760515001ccb6200620072630201710163da440000001b1b1b1b1a021d9f", "hex"));
-/*30*/stream.push(new Buffer("1b1b1b1b01010101760700130884a17d6200620072630101760101070013081fe07f09080c2aec2d4c6b0001016321e000760700130884a17e6200620072630701770109080c2aec2d4c6b000172620165081f8ec97977078181c78203ff0101010104454d480177070100000009ff0101010109080c2aec2d4c6b000177070100010800ff63018201621e52ff5600064febde0177070100020800ff63018201621e52ff56000714e7d80177070100010801ff0101621e52ff5600064febde0177070100020801ff0101621e52ff56000714e7d80177070100010802ff0101621e52ff56000000000001770701000f0700ff0101621b52ff55000021c50177078181c78205ff010101018302c6d6d9343e931bde46e9c326d24c1e681ef435599687805268c132e0fc4f8dbda3d80547fab89438286c04422af3c922010101635d6800760700130884a17f62006200726302017101633a19000000001b1b1b1b1a0320d8", "hex"));
+/*27*/stream.push(new Buffer("1b1b1b1b0101010176050471a747620062007263010176010105017b37c10b090149534b0003c2a0a001016339200076050471a748620062007263070177010b090149534b0003c2a0a0070100620affff72620165022b94677a77078181c78203ff010101010449534b0177070100000009ff010101010b090149534b0003c2a0a00177070100010800ff650000018201621e52ff5900000000057aec910177070100010801ff0101621e52ff5900000000057aec910177070100010802ff0101621e52ff5900000000000000000177070100100700ff0101621b520055000000ed0177070100240700ff0101621b5200550000004f0177070100380700ff0101621b5200550000008901770701004c0700ff0101621b520055000000150177078181c78205ff0101010183026340b3539d70e46ac94b3879945918401c8c8bee998cd94c2465c46e12b96e6604842ad3b020820de7d7aa6b973bb9590101016396c90076050471a7496200620072630201710163f841001b1b1b1b1a007116", "hex"));
+/*28*/stream.push(new Buffer("1b1b1b1b01010101760515001cc962006200726301017601010507000997090805353f2d50dffb0101631fa500760515001cca62006200726307017701090805353f2d50dffb070100620affff72620165081f73967a77078181c78203ff010101010449534b0177070100000009ff01010101090805353f2d50dffb0177070100020800ff650001000001621e52ff59000000000a2e65710177070100020801ff0101621e52ff59000000000a2e65710177070100020802ff0101621e52ff5900000000000000000177070100100700ff0101621b520055000000000177070100240700ff0101621b520055000000000177070100380700ff0101621b5200550000000001770701004c0700ff0101621b520055000000000177078181c78205ff010101018302009be62e9f9a76ee597e7d3c1dc7ebc9cc73c852702d52ff4dc8c86eff6d61489289b73d55739eb3815ad0d1fc013c0f01010163e33700760515001ccb6200620072630201710163da440000001b1b1b1b1a021d9f", "hex"));
+/*29*/stream.push(new Buffer("1b1b1b1b01010101760700130884a17d6200620072630101760101070013081fe07f09080c2aec2d4c6b0001016321e000760700130884a17e6200620072630701770109080c2aec2d4c6b000172620165081f8ec97977078181c78203ff0101010104454d480177070100000009ff0101010109080c2aec2d4c6b000177070100010800ff63018201621e52ff5600064febde0177070100020800ff63018201621e52ff56000714e7d80177070100010801ff0101621e52ff5600064febde0177070100020801ff0101621e52ff56000714e7d80177070100010802ff0101621e52ff56000000000001770701000f0700ff0101621b52ff55000021c50177078181c78205ff010101018302c6d6d9343e931bde46e9c326d24c1e681ef435599687805268c132e0fc4f8dbda3d80547fab89438286c04422af3c922010101635d6800760700130884a17f62006200726302017101633a19000000001b1b1b1b1a0320d8", "hex"));
 
-/* Test Todos
-- #18: UInt64 Handling broke, also re-generate (or remove #17 afterwards)
-*/
-
-var testIndex = 30;
+var testIndex = -1;
 if (process.argv[2]) {
     testIndex=parseInt(process.argv[2], 10);
     console.log("Use Test "+testIndex);
