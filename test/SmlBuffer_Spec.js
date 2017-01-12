@@ -178,8 +178,8 @@ describe("SmlBuffer", function() {
 
 		it("should read value 18446744073709552000", function(){
 			smlBuffer = new SmlBuffer();
-			smlBuffer.getBuffer().writeDoubleBE(18446744073709552000, 0);
-			expect(smlBuffer.readUInt64()).to.be.equal(18446744073709552000);
+            smlBuffer.buffer=new Buffer("1234567890ABCDEF", "hex");
+			expect(smlBuffer.readUInt64()).to.be.equal("1311768467294899695");
 		});
 
 		it("should set offset to value 8", function(){
@@ -253,20 +253,26 @@ describe("SmlBuffer", function() {
 		it("should read value -16", function(){
 			smlBuffer = new SmlBuffer();
 			//smlBuffer.getBuffer().writeDoubleBE(-16, 0);
-            var Int64 = require('node-int64');
-            var int64 = new Int64(-16);
-            int64.copy(smlBuffer.buffer,0);
+            var Int64 = require('int64-buffer');
+            var int64 = new Int64.Int64BE(-16);
+            int64.toBuffer().copy(smlBuffer.buffer,0);
 			expect(smlBuffer.readInt64()).to.be.equal(-16);
 		});
 
 		it("should set offset to value 8", function(){
 			smlBuffer = new SmlBuffer();
 			//smlBuffer.getBuffer().writeDoubleBE(-16, 0);
-            var Int64 = require('node-int64');
-            var int64 = new Int64(-16);
-            int64.copy(smlBuffer.buffer,0);
+            var Int64 = require('int64-buffer');
+            var int64 = new Int64.Int64BE(-16);
+            int64.toBuffer().copy(smlBuffer.buffer,0);
             smlBuffer.readInt64();
 			expect(smlBuffer.getOffset()).to.be.equal(8);
+		});
+
+        it("should read value 18446744073709552000", function(){
+			smlBuffer = new SmlBuffer();
+            smlBuffer.buffer=new Buffer("EDCBA9876F543211", "hex");
+			expect(smlBuffer.readInt64()).to.be.equal("-1311768467294899695");
 		});
 
 	});
@@ -324,7 +330,7 @@ describe("SmlBuffer", function() {
 		it("should write value 16", function(){
 			smlBuffer = new SmlBuffer();
 			smlBuffer.writeUInt64(16);
-			expect(smlBuffer.getBuffer().readDoubleBE(0)).to.be.equal(16);
+            expect(smlBuffer.getBuffer().slice(0,8).toString('hex')).to.be.equal("0000000000000010");
 		});
 
 		it("should set offset to value 8", function(){
@@ -336,8 +342,7 @@ describe("SmlBuffer", function() {
         it("should write value 39693392=00000000025DAC50", function(){
 			smlBuffer = new SmlBuffer();
 			smlBuffer.writeUInt64(39693392);
-            var destBuffer=new Buffer("00000000025DAC50", "hex");
-			expect(smlBuffer.getBuffer().compare(destBuffer)).to.be.equal(0);
+			expect(smlBuffer.getBuffer().slice(0,8).toString('hex')).to.be.equal("00000000025dac50");
 		});
 	});
 
@@ -393,8 +398,8 @@ describe("SmlBuffer", function() {
 		it("should write value -16", function(){
 			smlBuffer = new SmlBuffer();
 			smlBuffer.writeInt64(-16);
-            var Int64 = require('node-int64');
-            var int64 = new Int64(smlBuffer.getBuffer(), 0);
+            var Int64 = require('int64-buffer');
+            var int64 = new Int64.Int64BE(smlBuffer.getBuffer(), 0);
 			expect(int64.toNumber(true)).to.be.equal(-16);
 		});
 
