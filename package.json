@@ -22,8 +22,7 @@
   },
   "homepage": "https://github.com/dspautz/OpenSML",
   "dependencies": {
-    "node-int64": "^0.3.3",
-    "crc": "*"
+    "int64-buffer": "^0.1.9"
   },
   "devDependencies": {
     "chai": "^1.10.0",
