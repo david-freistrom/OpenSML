@@ -59,7 +59,7 @@ smlFile.addMessage(smlMessage1);
 	periodListEntry.setValue(1252);
 	periodListEntry.setValueType(sml.Constants.INT16);
 	//periodListEntry.setValueSignature();
-	periodList.addPeriodListEntry(periodListEntry);
+	periodList.addListEntry(periodListEntry);
 
 	var periodListEntry = new sml.SmlPeriodListEntry();
 	periodListEntry.setObjName("0100010801ff");
@@ -68,7 +68,7 @@ smlFile.addMessage(smlMessage1);
 	periodListEntry.setValue(1252);
 	periodListEntry.setValueType(sml.Constants.INT16);
 	//periodListEntry.setValueSignature();
-	periodList.addPeriodListEntry(periodListEntry);
+	periodList.addListEntry(periodListEntry);
 
 	var periodListEntry = new sml.SmlPeriodListEntry();
 	periodListEntry.setObjName("0100100700ff");
@@ -77,7 +77,7 @@ smlFile.addMessage(smlMessage1);
 	periodListEntry.setValue(523);
 	periodListEntry.setValueType(sml.Constants.INT16);
 	//periodListEntry.setValueSignature();
-	periodList.addPeriodListEntry(periodListEntry);
+	periodList.addListEntry(periodListEntry);
 
 	var periodListEntry = new sml.SmlPeriodListEntry();
 	periodListEntry.setObjName("0100010802ff");
@@ -86,7 +86,7 @@ smlFile.addMessage(smlMessage1);
 	periodListEntry.setValue(986);
 	periodListEntry.setValueType(sml.Constants.INT16);
 	//periodListEntry.setValueSignature();
-	periodList.addPeriodListEntry(periodListEntry);
+	periodList.addListEntry(periodListEntry);
 
 	smlGetProfileListResponse.setPeriodList(periodList);
 	//smlGetProfileListResponse.setRawdata();
