@@ -6,7 +6,13 @@ function runTest(testIndex) {
     var smlFile = new sml.SmlFile();
 
     // STEP 1: Parse SML Telegram
-    smlFile.parse(stream[testIndex]);
+    try {
+        smlFile.parse(stream[testIndex]);
+    }
+    catch(err) {
+        console.log(smlFile.toString());
+        throw err;
+    }
 
     // STEP 2a: Output Message
     var parsedFirst = smlFile.toString();
