@@ -6,3 +6,4 @@ build
 .jshintrc
 test/results.txt
 npm_debug.log
+coverage
