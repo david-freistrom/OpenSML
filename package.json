@@ -1,6 +1,6 @@
 {
   "name": "open-sml",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Smart Message Language Implementation",
   "main": "index.js",
   "scripts": {
