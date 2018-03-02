@@ -437,9 +437,18 @@ describe("SmlBuffer", function() {
 			expect(smlBuffer.getOffset()).to.be.equal(1);
 		});
 
-		it("should read value {type: 0x07, length: 0x10}", function(){
+        it("should read value {type: 0x07, length: 0x10}", function(){
 			smlBuffer = new SmlBuffer();
 			smlBuffer.getBuffer().writeUInt16BE(0xF171, 0);
+			var result = smlBuffer.readTLField();
+			expect(result.type).to.be.equal(0x07);
+			expect(result.length).to.be.equal(0x11);
+
+		});
+
+        it("should read value {type: 0x07, length: 0x10}", function(){
+			smlBuffer = new SmlBuffer();
+			smlBuffer.getBuffer().writeUInt16BE(0xF100, 0);
 			var result = smlBuffer.readTLField();
 			expect(result.type).to.be.equal(0x07);
 			expect(result.length).to.be.equal(0x10);
@@ -468,15 +477,27 @@ describe("SmlBuffer", function() {
 			expect(smlBuffer.getOffset()).to.be.equal(1);
 		});
 
-		it("should write value 0xF171", function(){
+		it("should write value 0xF107", function(){
 			smlBuffer = new SmlBuffer();
-			smlBuffer.writeTLField(0xF171);
-			expect(smlBufer.getBuffer().readUInt16BE(0)).to.be.equal(0xF171);
+			smlBuffer.writeTLField(0x7, 0x17);
+			expect(smlBuffer.getBuffer().readUInt16BE(0)).to.be.equal(0xF107);
 		});
 
-		it("should set offset to value 2 for 0xF171", function(){
+		it("should set offset to value 2 for 0xF107", function(){
 			smlBuffer = new SmlBuffer();
-			smlBuffer.writeTLField(0xF171);
+			smlBuffer.writeTLField(0x7, 0x17);
+			expect(smlBuffer.getOffset()).to.be.equal(2);
+		});
+
+        it("should write value 0x8302", function(){
+			smlBuffer = new SmlBuffer();
+			smlBuffer.writeTLField(0x0, 49);
+			expect(smlBuffer.getBuffer().readUInt16BE(0)).to.be.equal(0x8303);
+		});
+
+		it("should set offset to value 2 for 0x8302", function(){
+			smlBuffer = new SmlBuffer();
+			smlBuffer.writeTLField(0x0, 49);
 			expect(smlBuffer.getOffset()).to.be.equal(2);
 		});
 	});
