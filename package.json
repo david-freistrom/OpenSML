@@ -1,6 +1,6 @@
 {
   "name": "open-sml",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Smart Message Language Implementation",
   "main": "index.js",
   "scripts": {
@@ -16,6 +16,16 @@
     "Smart Message Language"
   ],
   "author": "David Spautz <d.spautz@web.de>",
+  "contributors": [
+    {
+      "name": "David Spautz",
+      "email": "d.spautz@web.de"
+    },
+    {
+      "name": "Apollon77",
+      "email": "ingo@fischer-ka.de"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/dspautz/OpenSML/issues"

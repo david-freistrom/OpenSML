@@ -31,7 +31,6 @@ OpenSML$ grunt test
 
 ### ToDo's
 
-* Write long OctetStrings (More than one byte TL-Field)
 * Write more unit tests with Mocha
 * JsDoc
 * Usage examples
