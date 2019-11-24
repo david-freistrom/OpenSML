@@ -20,20 +20,20 @@ describe("SmlBuffer", function() {
 	describe("SmlBuffer(buffer)", function(){
 
 		it("should set this.buffer to a given Buffer", function(){
-			var buffer = new Buffer("ffff", 'hex');
+			var buffer = Buffer.from("ffff", 'hex');
 			var smlBuffer = new SmlBuffer(buffer);
 		    expect(smlBuffer.getBuffer()).to.be.instanceof(Buffer);
 		    expect(smlBuffer.getBuffer()).to.be.equal(buffer);
 		});
 
 		it("should set this.offset to 0", function(){
-			var buffer = new Buffer("ffff", 'hex');
+			var buffer = Buffer.from("ffff", 'hex');
 			var smlBuffer = new SmlBuffer(buffer);
 			expect(smlBuffer.getOffset()).to.be.equal(0);
 		});
 
 		it("should set buffer length to 2", function(){
-			var buffer = new Buffer("ffff", 'hex');
+			var buffer = Buffer.from("ffff", 'hex');
 			var smlBuffer = new SmlBuffer(buffer);
 			expect(smlBuffer.getLength()).to.be.equal(2);
 		});
@@ -60,7 +60,7 @@ describe("SmlBuffer", function() {
 	 describe("getLength()", function(){
 
 	    it("should set length to given buffer size", function(){
-			var smlBuffer = new SmlBuffer(new Buffer("ffff", 'hex'));
+			var smlBuffer = new SmlBuffer(Buffer.from("ffff", 'hex'));
 			expect(smlBuffer.getLength()).to.be.equal(2);
 		});
 
@@ -178,7 +178,7 @@ describe("SmlBuffer", function() {
 
 		it("should read value 18446744073709552000", function(){
 			smlBuffer = new SmlBuffer();
-            smlBuffer.buffer=new Buffer("1234567890ABCDEF", "hex");
+            smlBuffer.buffer=Buffer.from("1234567890ABCDEF", "hex");
 			expect(smlBuffer.readUInt64()).to.be.equal("1311768467294899695");
 		});
 
@@ -191,7 +191,7 @@ describe("SmlBuffer", function() {
 
         it("should read value 00000000025DAC50=39693392", function(){
 			smlBuffer = new SmlBuffer();
-			smlBuffer.buffer=new Buffer("00000000025DAC50", "hex");
+			smlBuffer.buffer=Buffer.from("00000000025DAC50", "hex");
 			expect(smlBuffer.readUInt64()).to.be.equal(39693392);
 		});
 
@@ -271,7 +271,7 @@ describe("SmlBuffer", function() {
 
         it("should read value 18446744073709552000", function(){
 			smlBuffer = new SmlBuffer();
-            smlBuffer.buffer=new Buffer("EDCBA9876F543211", "hex");
+            smlBuffer.buffer=Buffer.from("EDCBA9876F543211", "hex");
 			expect(smlBuffer.readInt64()).to.be.equal("-1311768467294899695");
 		});
 
@@ -617,7 +617,7 @@ describe("SmlBuffer", function() {
 			smlBuffer = new SmlBuffer();
 			var stub = sinon.stub(smlBuffer, "readTLField");
 			stub.returns({type: 0x00, length: 0x00});
-	        expect(smlBuffer.readUnsigned()).to.be.empty;
+	        expect(smlBuffer.readUnsigned()).to.be.undefined;
 		});
 	});
 
@@ -736,48 +736,48 @@ describe("SmlBuffer", function() {
 			smlBuffer = new SmlBuffer();
 			var readTlField = sinon.stub(smlBuffer, "readTLField");
 			readTlField.returns({type: 0x00, length: 0x00});
-	        expect(smlBuffer.readUnsigned()).to.be.empty;
+	        expect(smlBuffer.readUnsigned()).to.be.undefined;
 		});
 	});
 
 	describe("readSmlValue()", function(){
 		it("should call readOctetString() for tlField 0x00", function(){
-			smlBuffer = new SmlBuffer(new Buffer("00", "hex"));
+			smlBuffer = new SmlBuffer(Buffer.from("00", "hex"));
 			var stub = sinon.stub(smlBuffer, "readOctetString");
 			smlBuffer.readSmlValue();
 			expect(stub).to.have.been.called;
 		});
 
 		it("should call readOctetString() for tlField 0x80", function(){
-			smlBuffer = new SmlBuffer(new Buffer("80", "hex"));
+			smlBuffer = new SmlBuffer(Buffer.from("80", "hex"));
 			var stub = sinon.stub(smlBuffer, "readOctetString");
 			smlBuffer.readSmlValue();
 			expect(stub).to.have.been.called;
 		});
 
 		it("should call readSmlBoolean() for tlField 0x40", function(){
-			smlBuffer = new SmlBuffer(new Buffer("40", "hex"));
+			smlBuffer = new SmlBuffer(Buffer.from("40", "hex"));
 			var stub = sinon.stub(smlBuffer, "readSmlBoolean");
 			smlBuffer.readSmlValue();
 			expect(stub).to.have.been.called;
 		});
 
 		it("should call readInteger() for tlField 0x50", function(){
-			smlBuffer = new SmlBuffer(new Buffer("50", "hex"));
+			smlBuffer = new SmlBuffer(Buffer.from("50", "hex"));
 			var stub = sinon.stub(smlBuffer, "readInteger");
 			smlBuffer.readSmlValue();
 			expect(stub).to.have.been.called;
 		});
 
 		it("should call readUnsigned() for tlField 0x60", function(){
-			smlBuffer = new SmlBuffer(new Buffer("60", "hex"));
+			smlBuffer = new SmlBuffer(Buffer.from("60", "hex"));
 			var stub = sinon.stub(smlBuffer, "readUnsigned");
 			smlBuffer.readSmlValue();
 			expect(stub).to.have.been.called;
 		});
 
 		it("should throw Error('Wrong TL-Field 0x11 for SmlValue!')", function(){
-			smlBuffer = new SmlBuffer(new Buffer("11", "hex"));
+			smlBuffer = new SmlBuffer(Buffer.from("11", "hex"));
 			var fn = function() {smlBuffer.readSmlValue()};
 	        expect(fn).to.throw("Wrong TL-Field 0x11 for SmlValue!");
 		});
@@ -865,29 +865,29 @@ describe("SmlBuffer", function() {
 		});
 
 		it("should call readUInt8 for tlField 0x42", function(){
-			smlBuffer = new SmlBuffer(new Buffer("4200", "hex"));
+			smlBuffer = new SmlBuffer(Buffer.from("4200", "hex"));
 			var stub = sinon.stub(smlBuffer, "readUInt8");
 			smlBuffer.readSmlBoolean();
 	        expect(stub).to.have.been.called;
 		});
 
 		it("should return true", function(){
-			smlBuffer = new SmlBuffer(new Buffer("4201", "hex"));
+			smlBuffer = new SmlBuffer(Buffer.from("4201", "hex"));
 	        expect(smlBuffer.readSmlBoolean()).to.be.equal(true);
 		});
 
 		it("should return false", function(){
-			smlBuffer = new SmlBuffer(new Buffer("4200", "hex"));
+			smlBuffer = new SmlBuffer(Buffer.from("4200", "hex"));
 	        expect(smlBuffer.readSmlBoolean()).to.be.equal(false);
 		});
 
 		it("should return undefined for OPTIONAL", function(){
-			smlBuffer = new SmlBuffer(new Buffer("01", "hex"));
+			smlBuffer = new SmlBuffer(Buffer.from("01", "hex"));
 	        expect(smlBuffer.readSmlBoolean()).to.be.equal(undefined);
 		});
 
 		it("should throw Error('Wrong TL-Field for Boolean!')", function(){
-			smlBuffer = new SmlBuffer(new Buffer("4300", "hex"));
+			smlBuffer = new SmlBuffer(Buffer.from("4300", "hex"));
 			var fn = function() {smlBuffer.readSmlBoolean()};
 	        expect(fn).to.throw("Wrong TL-Field for Boolean!");
 		});
@@ -933,31 +933,31 @@ describe("SmlBuffer", function() {
 
 	describe("readChoice()", function(){
 		it("should call readTLField()", function(){
-			smlBuffer = new SmlBuffer(new Buffer("726201", "hex"));
+			smlBuffer = new SmlBuffer(Buffer.from("726201", "hex"));
 			var readTlField = sinon.spy(smlBuffer, "readTLField");
 	        smlBuffer.readChoice();
 	        expect(readTlField).to.have.been.called;
 		});
 
 		it("should call readUInt8 for tlField 0x72", function(){
-			smlBuffer = new SmlBuffer(new Buffer("726201", "hex"));
+			smlBuffer = new SmlBuffer(Buffer.from("726201", "hex"));
 			var readUInt8 = sinon.spy(smlBuffer, "readUInt8");
 			smlBuffer.readChoice();
 	        expect(readUInt8).to.have.been.called;
 		});
 
 		it("should return 0x00001010", function(){
-			smlBuffer = new SmlBuffer(new Buffer("726500001010", "hex"));
+			smlBuffer = new SmlBuffer(Buffer.from("726500001010", "hex"));
 	        expect(smlBuffer.readChoice()).to.be.equal(0x00001010);
 		});
 
 		it("should return undefined for 0x01", function(){
-			smlBuffer = new SmlBuffer(new Buffer("01", "hex"));
+			smlBuffer = new SmlBuffer(Buffer.from("01", "hex"));
 	        expect(smlBuffer.readChoice()).to.be.equal(undefined);
 		});
 
 		it("should throw Error('Wrong TL-Field for Choice!')", function(){
-			smlBuffer = new SmlBuffer(new Buffer("00", "hex"));
+			smlBuffer = new SmlBuffer(Buffer.from("00", "hex"));
 			var fn = function() {smlBuffer.readChoice()};
 	        expect(fn).to.throw("Wrong TL-Field 0x00 for Choice!");
 		});

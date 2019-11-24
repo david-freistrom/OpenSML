@@ -2,19 +2,6 @@ module.exports = function(grunt) {
 
   // Project configuration.
   grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
-
-    //Configure a uglify task
-    uglify: {
-      options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
-      },
-      build: {
-        src: 'lib/**/*.js',
-        dest: 'build/<%= pkg.name %>.min.js'
-      }
-    },
-
     //Configure a mochaTest task
     mochaTest: {
       test: {
@@ -43,9 +30,6 @@ module.exports = function(grunt) {
 
   });
 
-  // Load the plugin that provides the "uglify" task.
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-
   //Add the grunt-mocha-test tasks.
   grunt.loadNpmTasks('grunt-mocha-test');
 
@@ -53,9 +37,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha-istanbul')
 
   // Default task(s).
-  grunt.registerTask('default', ['uglify']);
-  grunt.registerTask('build', ['uglify']);
-  grunt.registerTask('test', ['mochaTest']);
   grunt.registerTask('test', ['mochaTest']);
   grunt.registerTask('coverage', ['mocha_istanbul:coverage']);
 };
