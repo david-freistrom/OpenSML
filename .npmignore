@@ -1,0 +1,11 @@
+.settings
+node_modules
+build
+.project
+.tern-project
+.jshintrc
+test/results.txt
+npm_debug.log
+coverage
+.idea
+package-lock.json
