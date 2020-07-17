@@ -37,6 +37,11 @@ OpenSML$ grunt test
 * Integration tests with Mocha
 * Validations
 
+## Changelog
+
+### __WORK IN PROGRESS__
+* (Apollon77) check variables before trying to access them
+
 ## License
 
 Copyright (c) 2015-2019 [David Spautz @ Freistrom], 2018-2019 Apollon77 [iobroker@fischer-ka.de]
@@ -66,3 +71,4 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ## Authors & contributors
 
 * David Spautz <spautz@freistrom-handel.de>
+* Ingo Fischer <iobroker@fischer-ka.de>
