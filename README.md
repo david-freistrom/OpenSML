@@ -40,7 +40,7 @@ OpenSML$ grunt test
 ## Changelog
 
 ### __WORK IN PROGRESS__
-* (Apollon77) check variables before trying to access them
+* (Apollon77) check variables in various places before trying to access them
 
 ## License
 
