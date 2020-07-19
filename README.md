@@ -39,7 +39,7 @@ OpenSML$ grunt test
 
 ## Changelog
 
-### __WORK IN PROGRESS__
+### 1.0.1 (2020-07-20)
 * (Apollon77) check variables in various places before trying to access them
 
 ## License
