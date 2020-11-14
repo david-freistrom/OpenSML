@@ -39,6 +39,9 @@ OpenSML$ grunt test
 
 ## Changelog
 
+### __WORK IN PROGRESS__
+* (hacki11) Support Holley DTZ541 wrongly implemented CRC Algorithm
+
 ### 1.0.1 (2020-07-20)
 * (Apollon77) check variables in various places before trying to access them
 
