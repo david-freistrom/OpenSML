@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/dspautz/OpenSML",
   "dependencies": {
-    "int64-buffer": "^0.99.1007"
+    "int64-buffer": "^1.0.0"
   },
   "devDependencies": {
     "@alcalzone/release-script": "^1.8.1",
