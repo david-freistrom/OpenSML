@@ -42,7 +42,7 @@
     "sinon-chai": "^3.5.0",
     "grunt": "^1.4.0",
     "grunt-contrib-jshint": "^3.0.0",
-    "grunt-contrib-nodeunit": "~2.1.0",
+    "grunt-contrib-nodeunit": "~3.0.0",
     "grunt-mocha-test": "^0.13.3",
     "mocha": "^8.2.1",
     "istanbul": "^0.4.5",
