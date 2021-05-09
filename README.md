@@ -1,12 +1,10 @@
 # OpenSML
 
-Smart Message Language (v. 1.0.3 ) Implementation with Node.js 4.x+
+[![NPM version](http://img.shields.io/npm/v/open-sml.svg)](https://www.npmjs.com/package/open-sml)
+[![Downloads](https://img.shields.io/npm/dm/open-sml.svg)](https://www.npmjs.com/package/open-sml)
+![Test and Release](https://github.com/david-freistrom/OpenSML/workflows/Test%20and%20Release/badge.svg)
 
-!!!
- This is not a complete tested version.
- Wrong inputs could hang-up or damage your system
- Use it by your own risk
-!!!
+Smart Message Language (v. 1.0.3 ) Implementation with Node.js 4.x+
 
 ## Install
 
@@ -47,7 +45,7 @@ OpenSML$ grunt test
 
 ## License
 
-Copyright (c) 2015-2019 [David Spautz @ Freistrom], 2018-2019 Apollon77 [iobroker@fischer-ka.de]
+Copyright (c) 2015-2019 [David Spautz @ Freistrom], 2018-2021 Apollon77 [iobroker@fischer-ka.de]
 
 MIT License
 
