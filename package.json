@@ -36,15 +36,15 @@
   },
   "devDependencies": {
     "@alcalzone/release-script": "^1.10.0",
-    "chai": "^4.2.0",
+    "chai": "^4.3.4",
     "chai-change": "^2.1.2",
-    "sinon": "^9.2.1",
-    "sinon-chai": "^3.5.0",
+    "sinon": "^10.0.0",
+    "sinon-chai": "^3.6.0",
     "grunt": "^1.4.0",
     "grunt-contrib-jshint": "^3.0.0",
-    "grunt-contrib-nodeunit": "~2.1.0",
+    "grunt-contrib-nodeunit": "~3.0.0",
     "grunt-mocha-test": "^0.13.3",
-    "mocha": "^8.2.1",
+    "mocha": "^8.4.0",
     "istanbul": "^0.4.5",
     "grunt-mocha-istanbul": "^5.0.2"
   }
