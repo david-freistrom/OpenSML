@@ -37,7 +37,7 @@ OpenSML$ grunt test
 
 ## Changelog
 
-### __WORK IN PROGRESS__
+### 1.0.3 (2021-07-03)
 * (fgather) fix typo tht lead to a crash
 
 ### 1.0.2 (2020-11-15)
