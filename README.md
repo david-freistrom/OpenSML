@@ -37,6 +37,9 @@ OpenSML$ grunt test
 
 ## Changelog
 
+### __WORK IN PROGRESS__
+* (fgather) fix typo tht lead to a crash
+
 ### 1.0.2 (2020-11-15)
 * (hacki11) Support Holley DTZ541 wrongly implemented CRC Algorithm
 
