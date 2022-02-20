@@ -35,7 +35,7 @@
     "int64-buffer": "^1.0.1"
   },
   "devDependencies": {
-    "@alcalzone/release-script": "^2.2.2",
+    "@alcalzone/release-script": "^3.5.2",
     "chai": "^4.3.6",
     "chai-change": "^2.1.2",
     "sinon": "^13.0.1",
