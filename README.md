@@ -48,7 +48,7 @@ OpenSML$ grunt test
 
 ## License
 
-Copyright (c) 2015-2019 [David Spautz @ Freistrom], 2018-2021 Apollon77 [iobroker@fischer-ka.de]
+Copyright (c) 2015-2019 [David Spautz @ Freistrom], 2018-2022 Apollon77 [iobroker@fischer-ka.de]
 
 MIT License
 
