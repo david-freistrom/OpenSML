@@ -37,6 +37,9 @@ OpenSML$ grunt test
 
 ## Changelog
 
+### __WORK IN PROGRESS__
+* (Apollon77) Fix potential crash case in SmlListEntry.toString on invalid data
+
 ### 1.0.3 (2021-07-03)
 * (fgather) fix typo tht lead to a crash
 
