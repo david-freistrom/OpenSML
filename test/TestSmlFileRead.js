@@ -211,14 +211,14 @@ var stream = [];
 describe("TestSmlFileRead", function() {
 
     it("process all Smls", function() {
-        var testIndex = 35;
-        /*if (process.argv[2]) {
+        var testIndex = -1;
+        if (process.argv[2]) {
             testIndex = parseInt(process.argv[2], 10);
             console.log("Use Test " + testIndex);
             if (isNaN(testIndex) || testIndex >= stream.length) {
                 testIndex = -1;
             }
-        }*/
+        }
         if (testIndex == -1) {
             for (var i = 0; i < stream.length; i++) {
                 console.log("========================");
