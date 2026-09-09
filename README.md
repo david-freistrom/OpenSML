@@ -4,7 +4,7 @@
 [![Downloads](https://img.shields.io/npm/dm/open-sml.svg)](https://www.npmjs.com/package/open-sml)
 ![Test and Release](https://github.com/david-freistrom/OpenSML/workflows/Test%20and%20Release/badge.svg)
 
-Smart Message Language (v. 1.0.3 ) Implementation with Node.js 4.x+
+Smart Message Language (v. 1.0.3 ) Implementation with Node.js 16+
 
 ## Install
 
@@ -20,8 +20,8 @@ $ npm install open-sml --save
 
 ```
 OpenSML$ npm install
-OpenSML$ grunt build
-OpenSML$ grunt test
+OpenSML$ npm test
+OpenSML$ npm run coverage
 
 ```
 
