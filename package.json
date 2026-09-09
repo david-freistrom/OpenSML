@@ -8,7 +8,7 @@
     "release": "release-script",
     "coverage": "nyc mocha --recursive test",
     "lint": "jshint . --config .jshintrc",
-    "lint": "jshint . --config .jshintrc"
+    "lint": "jshint index.js lib test --config .jshintrc"
   },
   "repository": {
     "type": "git",
