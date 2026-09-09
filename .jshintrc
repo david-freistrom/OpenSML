@@ -1,0 +1,9 @@
+{
+  "node": true,
+  "esversion": 6,
+  "expr": true,
+  "asi": true,
+  "-W004": true,
+  "-W027": true,
+  "-W080": true
+}
