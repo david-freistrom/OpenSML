@@ -32,5 +32,14 @@ describe("SmlMessage", function() {
 			let smlMessage = SmlMessage.parse(new SmlBuffer(buffer));
 			expect(smlMessage.valid).to.be.true;
 		});
+
+		it("should parse valid message with short crc encoding", function () {
+			let shortCrc = Buffer.from("7603007562006200726302017101625b00", "hex");
+			let longCrc = Buffer.from("760300756200620072630201710163005b00", "hex");
+			let shortMessage = SmlMessage.parse(new SmlBuffer(shortCrc));
+			let longMessage = SmlMessage.parse(new SmlBuffer(longCrc));
+			expect(shortMessage.valid).to.be.true;
+			expect(longMessage.valid).to.be.true;
+		});
 	});
 });
