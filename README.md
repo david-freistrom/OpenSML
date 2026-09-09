@@ -20,6 +20,7 @@ $ npm install open-sml --save
 
 ```
 OpenSML$ npm install
+OpenSML$ npm run lint
 OpenSML$ npm test
 OpenSML$ npm run coverage
 

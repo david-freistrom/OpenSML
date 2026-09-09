@@ -29,7 +29,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [20.x]
+        node-version: [24.x]
 
     steps:
       - uses: actions/checkout@v4
@@ -42,6 +42,9 @@ jobs:
 
       - name: Install Dependencies
         run: npm ci
+
+      - name: Run lint
+        run: npm run lint
 
   # Runs adapter tests on all supported node versions and OSes
   lib-tests:
@@ -70,7 +73,7 @@ jobs:
         run: npm test
 
       - name: Run coverage
-        if: matrix.os == 'ubuntu-latest' && matrix.node-version == '20.x'
+        if: matrix.os == 'ubuntu-latest' && matrix.node-version == '24.x'
         run: npm run coverage
 
   # Deploys the final package to NPM
