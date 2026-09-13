@@ -7,6 +7,7 @@ build
 test/results.txt
 npm_debug.log
 coverage
+.nyc_output
 .idea
 package-lock.json
 test
